@@ -1,1 +1,62 @@
-alias zoom="flatpak run us.zoom.Zoom"
+#!/bin/sh
+
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+
+# Renaming long, complicated actions
+alias \
+	ips='sh ~/scripts/user_scripts/ips' \
+	pdfjoin='pdfjoin --paper a4paper --rotateoversize false' \
+	cemu='mesa_glthread=true wine64 /home/fractal-pc/Games/cemu_1.19.0/Cemu.exe' \
+	grub-update="sudo grub-mkconfig -o /boot/grub/grub.cfg" \
+	mirror-update="sudo reflector --verbose --score 100 -l 50 -f 10 --sort rate --save /etc/pacman.d/mirrorlist"
+
+# Disabling network access for wine applications, for safety reasons
+alias \
+	win='wine64' \
+	win32='wine' \
+	fwin='firejail wine64' \
+	fwin32='firejail wine'
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vI" \
+	mkd="mkdir -pv" \
+	yt="youtube-dl --add-metadata -i" \
+	yta="yt -x -f bestaudio/best" \
+	ffmpeg="ffmpeg -hide_banner" \
+	extract="unp -u"
+
+# Colorize commands when possible.
+alias \
+	ls="ls -hN --color=auto --group-directories-first" \
+	grep="grep --color=auto" \
+	diff="diff --color=auto" \
+	ccat="highlight --out-format=ansi"
+
+# These common commands are just too long! Abbreviate them.
+alias \
+	ka="killall" \
+	g="git" \
+	trem="transmission-remote" \
+	YT="youtube-viewer" \
+	sdn="sudo shutdown -h now" \
+	f="$FILE" \
+	e="$EDITOR" \
+	v="$EDITOR" \
+	n="$FILE_MANAGER" \
+	p="sudo pacman" \
+	xi="sudo xbps-install" \
+	xr="sudo xbps-remove -R" \
+	xq="xbps-query" \
+	z="zathura" \
+	rs="rsync -ah --info=progress2 SOURCE DEST" \
+	pv='source ~/pyvenv/bin/activate'
+
+alias \
+	magit="nvim -c MagitOnly" \
+	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc" \
+	weath="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" \
+	tmux="tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" \
